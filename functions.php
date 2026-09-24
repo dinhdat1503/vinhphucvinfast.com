@@ -31,9 +31,11 @@ add_action('init', function() {
 // Thêm email vào mảng bên dưới để nhận đồng thời nhiều địa chỉ
 // =========================================================
 define('VFVP_CONTACT_EMAILS', [
-    'ngodinhdat15@gmail.com',     // Email chính — quản lý đại lý
-    // 'email2@example.com',      // Thêm email khác vào đây khi cần
-    // 'email3@example.com',
+    'ngodinhdat15@gmail.com',
+    'autovinfast686@gmail.com',
+    'mlien3267@gmail.com',
+    'phuocvandangdilam@gmail.com',
+    'hoangbuizzzz15@gmail.com',
 ]);
 
 // --- SMTP Gmail: gửi mail qua tài khoản Gmail chính hãng ---
@@ -66,22 +68,9 @@ add_filter('wp_mail', function ($args) {
     if (empty($all_emails))
         return $args;
 
-    // Gom tất cả email thành chuỗi CC
-    $primary = $all_emails[0];
-    $cc_list = array_slice($all_emails, 1);
-
-    // Đặt người nhận chính
+    // Nếu to chỉ là admin_email mặc định, đổi thành danh sách các mail
     if (empty($args['to']) || $args['to'] === get_option('admin_email')) {
-        $args['to'] = $primary;
-    }
-
-    // Thêm CC cho các email còn lại
-    if (!empty($cc_list)) {
-        $existing_headers = is_array($args['headers']) ? $args['headers'] : (array) explode("\n", $args['headers']);
-        foreach ($cc_list as $cc_email) {
-            $existing_headers[] = 'Cc: ' . $cc_email;
-        }
-        $args['headers'] = $existing_headers;
+        $args['to'] = implode(', ', $all_emails);
     }
 
     return $args;
@@ -89,17 +78,15 @@ add_filter('wp_mail', function ($args) {
 
 // --- CF7: Tự động chuẩn hóa và bảo vệ Email gửi về từ mọi Form (Báo giá, Lái thử, Phụ kiện, Liên hệ) ---
 add_filter('wpcf7_mail_components', function ($components, $contact_form) {
-    $primary_email = VFVP_CONTACT_EMAILS[0] ?? get_option('admin_email');
-    $cc_emails = array_slice(VFVP_CONTACT_EMAILS, 1);
-
-    // 1. Đặt người nhận chính & CC
-    $components['recipient'] = $primary_email;
-    $additional = '';
-    if (!empty($cc_emails)) {
-        foreach ($cc_emails as $cc) {
-            $additional .= "Cc: " . $cc . "\n";
-        }
+    // Nếu trong CF7 admin người dùng đã cấu hình nhiều email ở mục To, giữ nguyên
+    $current_to = trim($components['recipient'] ?? '');
+    if (!empty($current_to) && strpos($current_to, ',') !== false) {
+        // Đã có danh sách nhiều email từ admin CF7
+    } else {
+        // Mặc định gửi tới toàn bộ danh sách VFVP_CONTACT_EMAILS
+        $components['recipient'] = implode(', ', VFVP_CONTACT_EMAILS);
     }
+    $additional = '';
 
     // 2. Lấy dữ liệu thực tế từ Submission an toàn (hỗ trợ cả array lẫn string từ select/checkbox)
     $submission = class_exists('WPCF7_Submission') ? WPCF7_Submission::get_instance() : null;
