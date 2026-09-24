@@ -70,6 +70,19 @@ body, html, button, input, select, textarea, p, h1, h2, h3, h4, h5, h6, a, span,
   overflow: visible !important;
 }
 
+/* Sticky Car Subnav Bar (PDP) - Luôn hiển thị đè lên trên Header khi cuộn */
+.vf-subnav {
+  z-index: 100001 !important;
+}
+.admin-bar .vf-subnav {
+  top: 32px !important;
+}
+@media (max-width: 782px) {
+  .admin-bar .vf-subnav {
+    top: 46px !important;
+  }
+}
+
 .header-main {
   background: #ffffff !important;
   box-shadow: 0 2px 16px rgba(15, 23, 42, 0.08) !important;

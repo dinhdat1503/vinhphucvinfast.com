@@ -50,7 +50,7 @@ $uploads_url = content_url('/uploads/official_cars/ecvan');
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #E2E8F0;
-    z-index: 999;
+    z-index: 9999;
     display: flex;
     align-items: center;
     transform: translateY(-100%);
