@@ -632,7 +632,7 @@ $common_url  = content_url('/uploads/official_cars/common');
         Khách hàng đặt cọc sớm được nhận ngay ưu đãi <strong>61.000.000 VNĐ/xe</strong> trực tiếp vào giá bán cùng suất bàn giao xe sớm nhất tại VinFast Vĩnh Phúc.
       </p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-        <a href="tel:0981335522" class="vf-btn vf-btn-outline" style="background:#ffffff !important; color:#2563EB !important; border-color:#ffffff !important;">📞 GỌI HOTLINE: 0981.335.522</a>
+        <a href="tel:0973800616" class="vf-btn vf-btn-outline" style="background:#ffffff !important; color:#2563EB !important; border-color:#ffffff !important;">📞 GỌI HOTLINE: 0973 800 616</a>
         <a href="<?php echo esc_url(home_url('/dang-ky-lai-thu/?model=vfwild')); ?>" class="vf-btn vf-btn-dark">ĐĂNG KÝ LÁI THỬ & TƯ VẤN</a>
       </div>
     </div>
@@ -643,7 +643,7 @@ $common_url  = content_url('/uploads/official_cars/common');
      10. MOBILE QUICK ACTION BAR (STICKY BOTTOM)
      ========================================== -->
 <div class="vfwild-mobile-bar">
-  <a href="tel:0981335522">
+  <a href="tel:0973800616">
     <span>📞</span>
     <span>Gọi điện</span>
   </a>
