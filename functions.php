@@ -2872,6 +2872,39 @@ function vfvp_render_lead_form($selected_car = '', $custom_cf7_shortcode = '')
     return ob_get_clean();
 }
 
+// Xử lý gửi mail nếu form báo giá dùng fallback HTML form (admin-post.php)
+add_action('admin_post_vf_submit_lead_form', 'vf_handle_lead_form_post');
+add_action('admin_post_nopriv_vf_submit_lead_form', 'vf_handle_lead_form_post');
+function vf_handle_lead_form_post() {
+    $name    = sanitize_text_field($_POST['your-name'] ?? '');
+    $phone   = sanitize_text_field($_POST['your-tel'] ?? '');
+    $car     = sanitize_text_field($_POST['car-model'] ?? 'Xe VinFast');
+    $payment = sanitize_text_field($_POST['payment-method'] ?? '');
+    $message = sanitize_textarea_field($_POST['your-message'] ?? '');
+
+    $to = implode(', ', VFVP_CONTACT_EMAILS);
+    $subject = '[BÁO GIÁ] ' . ($name ?: 'Khách hàng') . ($phone ? ' - ' . $phone : '') . ' yêu cầu báo giá ' . $car;
+    $body = "=== YÊU CẦU BÁO GIÁ XE VINFAST VĨNH PHÚC ===\n\n";
+    $body .= "Họ và tên     : " . $name . "\n";
+    $body .= "Số điện thoại : " . $phone . "\n";
+    $body .= "Dòng xe       : " . $car . "\n";
+    $body .= "Phương thức   : " . $payment . "\n";
+    $body .= "Ghi chú       : " . $message . "\n\n";
+    $body .= "Thời gian gửi : " . date_i18n('d/m/Y H:i:s') . "\n";
+    $body .= "Trang gửi     : " . (wp_get_referer() ?: home_url()) . "\n";
+    $body .= "\n--- VinFast Vĩnh Phúc ---";
+
+    $headers = [
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: VinFast Vĩnh Phúc <noreply@vinhphucvinfast.com>'
+    ];
+    wp_mail($to, $subject, $body, $headers);
+
+    $referer = wp_get_referer() ?: home_url('/bao-gia-lan-banh/');
+    wp_redirect(add_query_arg('quote_sent', '1', $referer));
+    exit;
+}
+
 // Filter CF7 output to ensure VinFast VF Wild is available in car-model dropdown
 add_filter('wpcf7_form_elements', function ($content) {
     if (strpos($content, 'name="car-model"') !== false && strpos($content, 'VinFast VF Wild') === false) {
@@ -3246,7 +3279,7 @@ function vf_handle_acc_order_submission()
         wp_send_json_error(['message' => 'Vui lòng điền đầy đủ Họ tên và Số điện thoại']);
     }
 
-    $to = get_option('admin_email');
+    $to = implode(', ', VFVP_CONTACT_EMAILS);
     $subject = '[ĐẶT MUA PHỤ KIỆN] ' . $prod_name . ' - ' . $name . ' (' . $phone . ')';
 
     $body = "YÊU CẦU ĐẶT MUA PHỤ KIỆN TỪ WEBSITE VINFAST VĨNH PHÚC\n";
