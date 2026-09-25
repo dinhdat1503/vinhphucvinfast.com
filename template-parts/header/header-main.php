@@ -26,7 +26,7 @@ $uploads_url = content_url('/uploads/official_cars/common');
     <!-- DESKTOP MENU MAIN WITH MEGA MENU DROPDOWN -->
     <div class="header-nav hide-for-medium">
       <ul class="header-nav-main">
-        <li class="menu-item"><a href="<?php echo esc_url(home_url('/#gioi-thieu')); ?>">Giới thiệu</a></li>
+        <li class="menu-item"><a href="<?php echo esc_url(home_url('/')); ?>">Trang chủ</a></li>
 
         <!-- MEGA MENU DROP DOWN DÒNG XE VINFAST -->
         <li class="menu-item menu-item-has-children vf-megamenu-item">
@@ -165,10 +165,13 @@ $uploads_url = content_url('/uploads/official_cars/common');
           </div>
         </li>
 
-        <!-- PHỤ KIỆN XE -->
+        <!-- [TẠM ẨN] PHỤ KIỆN XE - Mở lại khi cần -->
+        <?php /*
         <li class="menu-item"><a href="<?php echo esc_url(home_url('/phu-kien/')); ?>">Phụ kiện xe</a></li>
+        */ ?>
 
-        <!-- DỊCH VỤ HẬU MÃI (KÈM MEGA MENU DỊCH VỤ) -->
+        <!-- [TẠM ẨN] DỊCH VỤ HẬU MÃI (KÈM MEGA MENU DỊCH VỤ) - Mở lại khi cần -->
+        <?php /*
         <li class="menu-item menu-item-has-children vf-megamenu-item vf-megamenu-service-item">
           <a href="<?php echo esc_url(home_url('/dich-vu/')); ?>">Dịch vụ hậu mãi <span class="vf-dropdown-arrow">▾</span></a>
 
@@ -241,14 +244,19 @@ $uploads_url = content_url('/uploads/official_cars/common');
             </div>
           </div>
         </li>
+        */ ?>
 
         <li class="menu-item"><a href="<?php echo esc_url(home_url('/pin-va-tram-sac/')); ?>">Pin và trạm sạc</a></li>
 
-        <!-- DỰ TOÁN & TRẢ GÓP -->
+        <!-- [TẠM ẨN] DỰ TOÁN & TRẢ GÓP - Mở lại khi cần -->
+        <?php /*
         <li class="menu-item"><a href="<?php echo esc_url(home_url('/du-toan-chi-phi/')); ?>">Dự toán & Trả góp</a></li>
+        */ ?>
 
-        <!-- SO SÁNH XE -->
+        <!-- [TẠM ẨN] SO SÁNH XE - Mở lại khi cần -->
+        <?php /*
         <li class="menu-item"><a href="<?php echo esc_url(home_url('/so-sanh-xe/')); ?>">So sánh xe</a></li>
+        */ ?>
 
         <!-- BÁO GIÁ LĂN BÁNH -->
         <li class="menu-item"><a href="<?php echo esc_url(home_url('/bao-gia-lan-banh/')); ?>">Báo giá lăn bánh</a></li>
@@ -325,7 +333,7 @@ $uploads_url = content_url('/uploads/official_cars/common');
     <!-- MENU ITEMS matching desktop menu structure -->
     <ul class="vf-mobile-menu-list">
       <li>
-        <a href="<?php echo esc_url(home_url('/#gioi-thieu')); ?>">GIỚI THIỆU</a>
+        <a href="<?php echo esc_url(home_url('/')); ?>">TRANG CHỦ</a>
       </li>
 
       <!-- Ô TÔ (XE CÁ NHÂN & XE DỊCH VỤ) -->
@@ -383,19 +391,20 @@ $uploads_url = content_url('/uploads/official_cars/common');
         </ul>
       </li>
 
-      <!-- PHỤ KIỆN XE -->
+      <!-- [TẠM ẨN] PHỤ KIỆN XE - Mở lại khi cần -->
+      <?php /*
       <li>
         <a href="<?php echo esc_url(home_url('/phu-kien/')); ?>">PHỤ KIỆN XE</a>
       </li>
+      */ ?>
 
-      <!-- DỊCH VỤ HẬU MÃI -->
+      <!-- [TẠM ẨN] DỊCH VỤ HẬU MÃI - Mở lại khi cần -->
+      <?php /*
       <li class="vf-has-child">
         <div class="vf-menu-item-head">
           <a href="<?php echo esc_url(home_url('/dich-vu/')); ?>">DỊCH VỤ HẬU MÃI</a>
           <button class="vf-submenu-toggle" onclick="vfToggleSubmenu(this)" aria-label="Mở dịch vụ hậu mãi">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
         </div>
         <ul class="vf-submenu">
@@ -408,31 +417,38 @@ $uploads_url = content_url('/uploads/official_cars/common');
           <li><a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/#warranty-book-dropdown')); ?>">Tra cứu tài liệu hướng dẫn</a></li>
         </ul>
       </li>
+      */ ?>
 
       <!-- PIN VÀ TRẠM SẠC -->
       <li>
         <a href="<?php echo esc_url(home_url('/pin-va-tram-sac/')); ?>">PIN VÀ TRẠM SẠC</a>
       </li>
 
-      <!-- DỰ TOÁN & TRẢ GÓP -->
+      <!-- [TẠM ẨN] DỰ TOÁN & TRẢ GÓP - Mở lại khi cần -->
+      <?php /*
       <li>
         <a href="<?php echo esc_url(home_url('/du-toan-chi-phi/')); ?>">DỰ TOÁN & TRẢ GÓP</a>
       </li>
+      */ ?>
 
-      <!-- SO SÁNH XE -->
+      <!-- [TẠM ẨN] SO SÁNH XE - Mở lại khi cần -->
+      <?php /*
       <li>
         <a href="<?php echo esc_url(home_url('/so-sanh-xe/')); ?>">SO SÁNH XE</a>
       </li>
+      */ ?>
 
       <!-- BÁO GIÁ LĂN BÁNH -->
       <li>
         <a href="<?php echo esc_url(home_url('/bao-gia-lan-banh/')); ?>">BÁO GIÁ LĂN BÁNH</a>
       </li>
 
-      <!-- CHÍNH SÁCH BẢO MẬT -->
+      <!-- [TẠM ẨN] CHÍNH SÁCH BẢO MẬT -->
+      <?php /*
       <li>
         <a href="<?php echo esc_url(home_url('/chinh-sach-bao-mat/')); ?>">CHÍNH SÁCH BẢO MẬT</a>
       </li>
+      */ ?>
     </ul>
 
     <!-- MOBILE DRAWER FOOTER CTA -->
