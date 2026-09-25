@@ -52,8 +52,7 @@ $uploads_url = content_url('/uploads/official_cars/common');
             </li>
             <li>
               <span class="vf-info-icon">📞</span>
-              <span><strong>Hotline bán hàng:</strong> <a href="tel:0973800616" class="vf-footer-phone">0973 800
-                  616</a></span>
+              <span><strong>Hotline bán hàng:</strong> <a href="tel:0973800616" class="vf-footer-phone">0973 800 616</a></span>
             </li>
             <li>
               <span class="vf-info-icon">✉️</span>

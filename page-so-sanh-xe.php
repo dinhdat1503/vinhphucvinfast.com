@@ -519,7 +519,7 @@ $cars_db = [
 
   /* 3. Thêm Header Tiêu đề Báo giá VinFast Vĩnh Phúc khi in */
   .vf-compare-matrix-card::before {
-    content: "ĐẠI LÝ VINFAST VĨNH PHÚC - BẢNG SO SÁNH CHI TIẾT DÒNG XE Ô TÔ ĐIỆN\A Hotline: 1900 636 975 | Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc";
+    content: "ĐẠI LÝ VINFAST VĨNH PHÚC - BẢNG SO SÁNH CHI TIẾT DÒNG XE Ô TÔ ĐIỆN\A Hotline: 0973 800 616 | Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc";
     white-space: pre-wrap;
     display: block;
     text-align: center;
@@ -835,7 +835,7 @@ function vfExportCompareExcel() {
 
   let csvContent = "\uFEFF";
   csvContent += "ĐẠI LÝ VINFAST VĨNH PHÚC - BẢNG SO SÁNH CHI TIẾT DÒNG XE ĐIỆN VINFAST\n";
-  csvContent += "Hotline: 1900 636 975 - Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc\n\n";
+  csvContent += "Hotline: 0973 800 616 - Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc\n\n";
 
   const rows = table.querySelectorAll('tr');
   rows.forEach(row => {

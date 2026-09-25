@@ -925,7 +925,7 @@ get_header();
     <div class="vf-print-logo-title">ĐẠI LÝ VINFAST VĨNH PHÚC</div>
     <div class="vf-print-doc-title">BẢNG DỰ TOÁN CHI PHÍ LĂN BÁNH & VAY TRẢ GÓP KHÁCH HÀNG</div>
     <div class="vf-print-meta">
-      Hotline: <strong>1900 636 975</strong> | Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc | Ngày lập: <span id="vf-print-date"></span>
+      Hotline: <strong>0973 800 616</strong> | Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc | Ngày lập: <span id="vf-print-date"></span>
     </div>
   </div>
 
@@ -1425,7 +1425,7 @@ get_header();
 
     let csvContent = "\uFEFF";
     csvContent += "ĐẠI LÝ VINFAST VĨNH PHÚC - BẢNG DỰ TOÁN CHI PHÍ LĂN BÁNH & VAY TRẢ GÓP\n";
-    csvContent += "Hotline: 1900 636 975 - Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc\n\n";
+    csvContent += "Hotline: 0973 800 616 - Địa chỉ: KCN Khai Quang, Vĩnh Yên, Vĩnh Phúc\n\n";
     csvContent += `Dòng xe,${modelName}\n`;
     csvContent += `Phiên bản,${verName.replace(/,/g, '')}\n`;
     csvContent += `Nơi đăng ký,${isHanoi ? 'Hà Nội / TP.HCM' : 'Vĩnh Phúc & Các Tỉnh'}\n`;

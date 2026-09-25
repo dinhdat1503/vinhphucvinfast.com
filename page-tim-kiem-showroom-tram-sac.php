@@ -114,7 +114,7 @@ $uploads_url = content_url('/uploads/official_cars/common');
             
             <div class="vf-map-card-info">
               <p class="vf-map-addr"><span class="vf-info-icon">📍</span> KĐT Nam Vĩnh Yên, Đường Nguyễn Tất Thành, TP. Vĩnh Yên, Tỉnh Vĩnh Phúc</p>
-              <p class="vf-map-phone"><span class="vf-info-icon">📞</span> Hotline Kinh doanh: <strong>1900 636 975</strong></p>
+              <p class="vf-map-phone"><span class="vf-info-icon">📞</span> Hotline Kinh doanh: <a href="tel:0973800616"><strong>0973 800 616</strong></a></p>
               <p class="vf-map-phone"><span class="vf-info-icon">🛠️</span> Hotline Cứu hộ & Dịch vụ: <strong>1900 23 23 89 (Nhánh 1)</strong></p>
               <p class="vf-map-hours"><span class="vf-info-icon">🕒</span> Giờ làm việc: 08:00 - 18:00 (Thứ 2 - Chủ Nhật)</p>
             </div>

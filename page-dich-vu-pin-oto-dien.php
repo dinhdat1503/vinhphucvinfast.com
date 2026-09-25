@@ -339,7 +339,7 @@ $uploads_url = content_url('/uploads/official_cars/service');
               <li>Chỉ được sử dụng nguồn sạc tiêu chuẩn theo khuyến cáo chính thức từ nhà sản xuất VinFast.</li>
               <li>Không sử dụng Pin làm nguồn cấp điện để vận hành các thiết bị ngoài xe khi không được chỉ định.</li>
               <li>Không tự ý can thiệp phần mềm điều khiển Pin (BMS) hoặc cập nhật phần mềm trái phép. Bất kỳ sự can thiệp nào cũng có thể làm mất hiệu lực bảo hành.</li>
-              <li>Không để xe ở nơi có nguy cơ ngập lụt. Trường hợp xe đã bị ngập nước, tuyệt đối không khởi động lại và gọi ngay cho hotline Cứu hộ VinFast Vĩnh Phúc 1900 636 975.</li>
+              <li>Không để xe ở nơi có nguy cơ ngập lụt. Trường hợp xe đã bị ngập nước, tuyệt đối không khởi động lại và gọi ngay cho hotline Cứu hộ VinFast Vĩnh Phúc 0973 800 616.</li>
               <li>Tránh để xe tiếp xúc môi trường nhiệt độ trên 55°C hoặc dưới -20°C quá 24 giờ liên tục để tránh suy giảm dung lượng pin.</li>
               <li>Khi dung lượng Pin còn lại dưới 5% (hiển thị màu đỏ trên màn hình), cần cắm sạc ngay lập tức để bảo vệ tế bào pin (cell pin).</li>
               <li>Trường hợp đỗ xe không sử dụng trên 30 ngày, vui lòng duy trì dung lượng pin ở mức 40% - 60% để đảm bảo tuổi thọ tối ưu.</li>

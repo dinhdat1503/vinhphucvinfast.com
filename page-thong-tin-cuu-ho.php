@@ -144,7 +144,7 @@ $uploads_url = content_url('/uploads/official_cars/service');
           
           <div class="vf-r-support-card">
             <h3>DỊCH VỤ CỨU HỘ KHẨN CẤP 24/7</h3>
-            <a href="tel:1900636975" class="vf-r-phone-link">Hotline Vĩnh Phúc: 1900 636 975</a>
+            <a href="tel:0973800616" class="vf-r-phone-link">Hotline Vĩnh Phúc: 0973 800 616</a>
             <a href="tel:1900232389" class="vf-r-phone-link">Tổng đài Cứu hộ VinFast: 1900 23 23 89 (Nhánh 1)</a>
             <a href="mailto:support.vn@vinfastauto.com" class="vf-r-email-link">Email: support.vn@vinfastauto.com</a>
 

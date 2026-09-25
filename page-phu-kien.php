@@ -116,8 +116,8 @@ $uploads_url = content_url('/uploads/official_cars');
           <div class="cta-icon">📞</div>
           <h4>Cần tư vấn phụ kiện?</h4>
           <p>Liên hệ chuyên viên VinFast Vĩnh Phúc để chọn đúng phụ kiện cho xe của bạn.</p>
-          <a href="tel:1900636975" class="vf-btn vf-btn-primary" style="width:100%;">
-            CALL: 1900 636 975
+          <a href="tel:0973800616" class="vf-btn vf-btn-primary" style="width:100%;">
+            CALL: 0973 800 616
           </a>
         </div>
 
@@ -248,7 +248,7 @@ $uploads_url = content_url('/uploads/official_cars');
      5. STICKY QUICK ACTION BAR (MOBILE ONLY)
      ============================================================ -->
 <div class="vf-acc-sticky-bar show-for-small">
-  <a href="tel:1900636975" class="bar-btn call">
+  <a href="tel:0973800616" class="bar-btn call">
     <span class="icon">📞</span>
     <span>GỌI NGAY</span>
   </a>
@@ -425,8 +425,8 @@ function vfOpenAccModal(accId) {
             '<button class="vf-btn vf-btn-primary" style="width:100%; height:44px;" onclick="vfCloseAccModal(); vfOpenOrderModal(\'' + item.name.replace(/'/g, "\\'") + '\', \'' + item.price + '\');">' +
               'MUA NGAY' +
             '</button>' +
-            '<a href="tel:1900636975" class="vf-btn vf-btn-outline" style="width:100%; height:44px; text-align:center; display:block; line-height:42px; text-decoration:none;">' +
-              'TƯ VẤN HOTLINE 📞' +
+            '<a href="tel:0973800616" class="vf-btn vf-btn-outline" style="width:100%; height:44px; text-align:center; display:block; line-height:42px; text-decoration:none;">' +
+              'TƯ VẤN HOTLINE: 0973 800 616 📞' +
             '</a>' +
           '</div>' +
         '</div>' +
