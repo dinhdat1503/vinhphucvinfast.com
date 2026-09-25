@@ -1173,14 +1173,19 @@ $uploads_url = content_url('/uploads/official_cars/herio');
     });
   });
 
+  // Sticky Subnav Scroll
   window.addEventListener('scroll', function () {
     const subnav = document.getElementById('herioStickySubnav');
-    if (window.scrollY > 480) {
+    if (!subnav) return;
+    const isScrolled = window.scrollY > 250;
+    if (isScrolled) {
       subnav.classList.add('active');
+      document.body.classList.add('vf-hide-main-header');
     } else {
       subnav.classList.remove('active');
+      document.body.classList.remove('vf-hide-main-header');
     }
-  });
+  }, { passive: true });
 
   (function () {
     var HERIO_KWH_PER_100KM = 14.5;

@@ -1561,12 +1561,15 @@ $uploads_url = content_url('/uploads/official_cars/vf6');
   // Sticky Subnav Scroll
   window.addEventListener('scroll', function () {
     const subnav = document.getElementById('vf6StickySubnav');
-    if (window.scrollY > 480) {
+    if (!subnav) return;
+    if (window.scrollY > 250) {
       subnav.classList.add('active');
+      document.body.classList.add('vf-hide-main-header');
     } else {
       subnav.classList.remove('active');
+      document.body.classList.remove('vf-hide-main-header');
     }
-  });
+  }, { passive: true });
 
   // Tabs Thông số VF 6
   function switchVF6SpecTab(tabKey, btn) {

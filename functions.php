@@ -291,13 +291,17 @@ function vfvp_enqueue_assets()
     wp_enqueue_style('glightbox', 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css', [], '3');
     wp_enqueue_script('glightbox', 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js', [], '3', true);
     // Child JS
-    wp_enqueue_script('vfvp-main', get_stylesheet_directory_uri() . '/assets/js/main.js', ['jquery', 'swiper-js'], '1.0.0', true);
+    wp_enqueue_script('vfvp-main', get_stylesheet_directory_uri() . '/assets/js/main.js', ['jquery', 'swiper-js'], time(), true);
     wp_enqueue_script('vfvp-modal', get_stylesheet_directory_uri() . '/assets/js/vfvp-modal.js', [], time(), true);
 
     // AJAX
     wp_localize_script('vfvp-main', 'vfvpAjax', [
         'url' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('vfvp_nonce'),
+    ]);
+    wp_localize_script('vfvp-main', 'vfvp_vars', [
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('vfvp_ajax_nonce'),
     ]);
 }
 
@@ -3248,15 +3252,7 @@ function vfvp_render_testdrive_form($selected_car = '')
     return vfvp_render_lead_form($selected_car);
 }
 
-// Enqueue main.js & vfvp-modal.js for VinFast Vĩnh Phúc
-add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_script('vfvp-modal-js', get_stylesheet_directory_uri() . '/assets/js/vfvp-modal.js', [], '1.1.0', true);
-    wp_enqueue_script('vfvp-main-js', get_stylesheet_directory_uri() . '/assets/js/main.js', ['jquery'], '1.1.0', true);
-    wp_localize_script('vfvp-main-js', 'vfvp_vars', [
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('vfvp_ajax_nonce')
-    ]);
-});
+
 
 // ============================================================
 // AJAX HANDLERS FOR ACCESSORY ORDERS & LEAD QUOTE EMAILS

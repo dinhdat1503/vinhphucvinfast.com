@@ -11809,16 +11809,21 @@ input:checked + .vf-slider:before {
 /* ============================================================
    GLOBAL SINGLE PRODUCT SUBNAV & HEADER HIDE TOGGLE
    ============================================================ */
+/* Smooth transition cho Header chính */
 #header,
 .header-wrapper,
 #masthead,
 .header-main {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease !important;
 }
 
+/* Khi vuốt xuống trên trang xe: Ẩn Header chính mượt mà lên trên */
 body.vf-hide-main-header #header,
-body.vf-hide-main-header .header-wrapper {
-  display: none !important;
+body.vf-hide-main-header .header-wrapper,
+body.vf-hide-main-header #masthead,
+#header.vf-header-hidden,
+.header-wrapper.vf-header-hidden {
+  transform: translateY(-100%) !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -11831,9 +11836,11 @@ body.single-product #main,
   overflow: visible !important;
 }
 
+/* Mặc định ở đầu trang: Subnav xe PHẢI ẨN HOÀN TOÀN */
 .vf-subnav,
 .vf-car-subnav,
-#carStickySubnav {
+#carStickySubnav,
+[id$="StickySubnav"] {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -11844,27 +11851,59 @@ body.single-product #main,
   backdrop-filter: blur(10px) !important;
   -webkit-backdrop-filter: blur(10px) !important;
   border-bottom: 1px solid #E2E8F0 !important;
-  z-index: 9999999 !important;
+  z-index: 100001 !important;
   display: flex !important;
   align-items: center !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
   transform: translateY(-100%) !important;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, visibility 0.25s ease !important;
   box-shadow: 0 4px 18px rgba(15, 23, 42, 0.12) !important;
 }
 
+/* Khi cuộn xuống: Subnav trượt xuống ghim gọn ở top: 0 */
 body.vf-hide-main-header .vf-subnav,
 body.vf-hide-main-header .vf-car-subnav,
 body.vf-hide-main-header #carStickySubnav,
+body.vf-hide-main-header [id$="StickySubnav"],
 .vf-subnav.active,
 .vf-car-subnav.subnav-visible,
-#carStickySubnav.active {
+#carStickySubnav.active,
+[id$="StickySubnav"].active {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
   transform: translateY(0) !important;
+}
+
+/* Khi có admin bar WordPress */
+.admin-bar .vf-subnav,
+.admin-bar .vf-car-subnav,
+.admin-bar #carStickySubnav,
+.admin-bar [id$="StickySubnav"] {
+  top: 32px !important;
+}
+@media (max-width: 782px) {
+  .admin-bar .vf-subnav,
+  .admin-bar .vf-car-subnav,
+  .admin-bar #carStickySubnav,
+  .admin-bar [id$="StickySubnav"] {
+    top: 46px !important;
+  }
+}
+
+/* Responsive Subnav trên Mobile/Tablet */
+@media (max-width: 992px) {
+  .vf-subnav-links {
+    display: none !important;
+  }
+  .vf-subnav-inner {
+    padding: 0 16px !important;
+  }
+  .vf-subnav-price-wrap {
+    display: none !important;
+  }
 }
 
 /* AOS Animation Fallback: Ensure content is always visible */

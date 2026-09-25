@@ -590,12 +590,16 @@ $uploads_url = content_url('/uploads/official_cars/vf3');
   // Sticky Subnav Scroll
   window.addEventListener('scroll', function() {
     const subnav = document.getElementById('vf3StickySubnav');
-    if (window.scrollY > 100) {
+    if (!subnav) return;
+    const isScrolled = window.scrollY > 250;
+    if (isScrolled) {
       subnav.classList.add('active');
+      document.body.classList.add('vf-hide-main-header');
     } else {
       subnav.classList.remove('active');
+      document.body.classList.remove('vf-hide-main-header');
     }
-  });
+  }, { passive: true });
 
   // Tabs Thông số VF 3
   function switchVF3SpecTab(tabKey, btn) {

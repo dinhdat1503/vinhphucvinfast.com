@@ -723,20 +723,24 @@ $car = $models_data[$car_key];
     });
   });
 
+  // Sticky Subnav Scroll
   window.addEventListener('scroll', function() {
     const subnav = document.getElementById('carStickySubnav');
     const header = document.getElementById('header');
     const headerWrapper = document.querySelector('.header-wrapper');
-    if (window.scrollY > 100) {
+    const isScrolled = window.scrollY > 250;
+    if (isScrolled) {
       if (subnav) subnav.classList.add('active');
+      document.body.classList.add('vf-hide-main-header');
       if (header) header.classList.add('vf-header-hidden');
       if (headerWrapper) headerWrapper.classList.add('vf-header-hidden');
     } else {
       if (subnav) subnav.classList.remove('active');
+      document.body.classList.remove('vf-hide-main-header');
       if (header) header.classList.remove('vf-header-hidden');
       if (headerWrapper) headerWrapper.classList.remove('vf-header-hidden');
     }
-  });
+  }, { passive: true });
 </script>
 
 <?php get_footer(); ?>

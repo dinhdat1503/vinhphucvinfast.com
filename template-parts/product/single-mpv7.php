@@ -1169,14 +1169,19 @@ $uploads_url = content_url('/uploads/official_cars/mpv7');
     });
   });
 
+  // Sticky Subnav Scroll
   window.addEventListener('scroll', function () {
     const subnav = document.getElementById('mpv7StickySubnav');
-    if (window.scrollY > 480) {
+    if (!subnav) return;
+    const isScrolled = window.scrollY > 250;
+    if (isScrolled) {
       subnav.classList.add('active');
+      document.body.classList.add('vf-hide-main-header');
     } else {
       subnav.classList.remove('active');
+      document.body.classList.remove('vf-hide-main-header');
     }
-  });
+  }, { passive: true });
 
   (function () {
     var MPV7_KWH_PER_100KM = 16.5;

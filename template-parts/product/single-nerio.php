@@ -1169,14 +1169,19 @@ $uploads_url = content_url('/uploads/official_cars/nerio');
     });
   });
 
+  // Sticky Subnav Scroll
   window.addEventListener('scroll', function () {
     const subnav = document.getElementById('nerioStickySubnav');
-    if (window.scrollY > 480) {
+    if (!subnav) return;
+    const isScrolled = window.scrollY > 250;
+    if (isScrolled) {
       subnav.classList.add('active');
+      document.body.classList.add('vf-hide-main-header');
     } else {
       subnav.classList.remove('active');
+      document.body.classList.remove('vf-hide-main-header');
     }
-  });
+  }, { passive: true });
 
   (function () {
     var NERIO_KWH_PER_100KM = 15.5;

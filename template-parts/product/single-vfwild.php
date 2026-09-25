@@ -666,14 +666,18 @@ $common_url  = content_url('/uploads/official_cars/common');
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Sticky Subnav
-  const subnav = document.getElementById('vfwildStickySubnav');
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 450) {
+    const subnav = document.getElementById('vfwildStickySubnav');
+    if (!subnav) return;
+    const isScrolled = window.scrollY > 250;
+    if (isScrolled) {
       subnav.classList.add('active');
+      document.body.classList.add('vf-hide-main-header');
     } else {
       subnav.classList.remove('active');
+      document.body.classList.remove('vf-hide-main-header');
     }
-  });
+  }, { passive: true });
 
   // Color Selector
   const colorDots = document.querySelectorAll('.vfwild-color-dot');

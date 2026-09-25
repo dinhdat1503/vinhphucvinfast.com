@@ -73,11 +73,15 @@
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]:not(.vf-car-subnav-tab)').forEach(a => {
       a.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        const href = this.getAttribute('href');
+        if (!href || href === '#' || href.length <= 1) return;
+        try {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } catch (err) {}
       });
     });
   }
@@ -177,11 +181,14 @@
   // 8. SINGLE PRODUCT SUBNAV & HEADER HIDE TOGGLE
   // =============================================
   function initProductSubnavToggle() {
-    var subnavs = document.querySelectorAll('.vf-subnav, .vf-car-subnav, #carStickySubnav');
+    var subnavs = document.querySelectorAll('.vf-subnav, .vf-car-subnav, #carStickySubnav, [id$="StickySubnav"]');
     if (!subnavs.length) return;
 
+    var ticking = false;
+
     function handleScroll() {
-      if (window.scrollY > 250) {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      if (scrollY > 250) {
         document.body.classList.add('vf-hide-main-header');
         subnavs.forEach(function(s) {
           s.classList.add('active');
@@ -194,10 +201,19 @@
           s.classList.remove('subnav-visible');
         });
       }
+      ticking = false;
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     handleScroll();
+    window.addEventListener('load', handleScroll);
   }
 
   // =============================================
