@@ -41,7 +41,7 @@ $uploads_url = content_url('/uploads/official_cars/common');
                 <button class="vf-mm-tab-btn" onclick="vfSwitchMegaTab('service', event)">DÒNG XE DỊCH VỤ</button>
               </div>
 
-              <!-- TAB 1: XE Ô TÔ ĐIỆN CÁ NHÂN (9 MẪU XE MÀU TRẮNG CHÍNH HÃNG) -->
+              <!-- TAB 1: XE Ô TÔ ĐIỆN CÁ NHÂN -->
               <div class="vf-mm-tab-content active" id="vf-mm-tab-ev">
                 <div class="vf-mm-cars-grid">
 
@@ -119,7 +119,7 @@ $uploads_url = content_url('/uploads/official_cars/common');
                 </div>
               </div>
 
-              <!-- TAB 2: XE DỊCH VỤ & THƯƠNG MẠI (5 MẪU XE MÀU TRẮNG CHÍNH HÃNG) -->
+              <!-- TAB 2: XE DỊCH VỤ & THƯƠNG MẠI -->
               <div class="vf-mm-tab-content" id="vf-mm-tab-service">
                 <div class="vf-mm-cars-grid vf-mm-cars-grid-5">
 
@@ -165,102 +165,93 @@ $uploads_url = content_url('/uploads/official_cars/common');
           </div>
         </li>
 
-        <!-- [TẠM ẨN] PHỤ KIỆN XE - Mở lại khi cần -->
-        <?php /*
-<li class="menu-item"><a href="<?php echo esc_url(home_url('/phu-kien/')); ?>">Phụ kiện xe</a></li>
-*/ ?>
+        <!-- PHỤ KIỆN XE -->
+        <li class="menu-item"><a href="<?php echo esc_url(home_url('/phu-kien/')); ?>">Phụ kiện xe</a></li>
 
-        <!-- [TẠM ẨN] DỊCH VỤ HẬU MÃI (KÈM MEGA MENU DỊCH VỤ) - Mở lại khi cần -->
-        <?php /*
-<li class="menu-item menu-item-has-children vf-megamenu-item vf-megamenu-service-item">
-<a href="<?php echo esc_url(home_url('/dich-vu/')); ?>">Dịch vụ hậu mãi <span class="vf-dropdown-arrow">▾</span></a>
+        <!-- DỊCH VỤ HẬU MÃI (KÈM MEGA MENU DỊCH VỤ) -->
+        <li class="menu-item menu-item-has-children vf-megamenu-item vf-megamenu-service-item">
+          <a href="<?php echo esc_url(home_url('/dich-vu/')); ?>">Dịch vụ hậu mãi <span class="vf-dropdown-arrow">▾</span></a>
 
-<div class="vf-megamenu-dropdown vf-service-megamenu-dropdown">
-  <div class="vf-megamenu-inner vf-service-megamenu-inner">
+          <div class="vf-megamenu-dropdown vf-service-megamenu-dropdown">
+            <div class="vf-megamenu-inner vf-service-megamenu-inner">
 
-    <!-- CỘT 1: SIDEBAR TABS CHỌN LOẠI PHƯƠNG TIỆN -->
-    <div class="vf-service-sidebar">
-      <button class="vf-service-tab-btn active" title="Dịch vụ Ô tô điện">
-        <img src="<?php echo esc_url($uploads_url . '/official_vf8.webp'); ?>" alt="Ô tô điện">
-      </button>
-      <button class="vf-service-tab-btn" title="Xe thương mại / Limo">
-        <img src="<?php echo esc_url($uploads_url . '/cutout_limo.png'); ?>" alt="Xe thương mại">
-      </button>
-      <button class="vf-service-tab-btn" title="Xe Buýt điện">
-        <img src="<?php echo esc_url($uploads_url . '/cutout_minio.png'); ?>" alt="Xe Buýt">
-      </button>
-    </div>
+              <!-- CỘT 1: SIDEBAR TABS CHỌN LOẠI PHƯƠNG TIỆN -->
+              <div class="vf-service-sidebar">
+                <button class="vf-service-tab-btn active" title="Dịch vụ Ô tô điện">
+                  <img src="<?php echo esc_url($uploads_url . '/official_vf8.webp'); ?>" alt="Ô tô điện">
+                </button>
+                <button class="vf-service-tab-btn" title="Xe thương mại / Limo">
+                  <img src="<?php echo esc_url($uploads_url . '/cutout_limo.png'); ?>" alt="Xe thương mại">
+                </button>
+                <button class="vf-service-tab-btn" title="Xe Buýt điện">
+                  <img src="<?php echo esc_url($uploads_url . '/cutout_minio.png'); ?>" alt="Xe Buýt">
+                </button>
+              </div>
 
-    <!-- CỘT 2: DANH SÁCH CÁC LIÊN KẾT DỊCH VỤ HẬU MÃI -->
-    <div class="vf-service-links-col">
-      <ul class="vf-service-links-list">
-        <li>
-          <a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/')); ?>">
-            Chính sách bảo hành
-          </a>
+              <!-- CỘT 2: DANH SÁCH CÁC LIÊN KẾT DỊCH VỤ HẬU MÃI -->
+              <div class="vf-service-links-col">
+                <ul class="vf-service-links-list">
+                  <li>
+                    <a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/')); ?>">
+                      Chính sách bảo hành
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo esc_url(home_url('/dich-vu-bao-duong/')); ?>">
+                      Dịch vụ bảo dưỡng
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo esc_url(home_url('/dich-vu-sua-chua/')); ?>">
+                      Dịch vụ sửa chữa
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?php echo esc_url(home_url('/thong-tin-cuu-ho/')); ?>">
+                      Thông tin cứu hộ
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- CỘT 3: 3 THẺ HÌNH ẢNH HÀNH ĐỘNG NỔI BẬT -->
+              <div class="vf-service-cards-col">
+                <a href="<?php echo esc_url(home_url('/dat-lich-dich-vu/')); ?>" class="vf-service-card">
+                  <img src="<?php echo esc_url($uploads_url . '/service_booking_banner.png'); ?>" alt="ĐẶT LỊCH DỊCH VỤ">
+                  <div class="vf-service-card-overlay">
+                    <span>ĐẶT LỊCH DỊCH VỤ</span>
+                  </div>
+                </a>
+
+                <a href="<?php echo esc_url(home_url('/tim-kiem-showroom-tram-sac/')); ?>" class="vf-service-card">
+                  <img src="<?php echo esc_url($uploads_url . '/service_workshop_banner.png'); ?>" alt="TRA CỨU XƯỞNG DỊCH VỤ">
+                  <div class="vf-service-card-overlay">
+                    <span>TRA CỨU XƯỞNG DỊCH VỤ</span>
+                  </div>
+                </a>
+
+                <a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/#warranty-book-dropdown')); ?>" class="vf-service-card">
+                  <img src="<?php echo esc_url($uploads_url . '/service_manual_banner.png'); ?>" alt="TRA CỨU TÀI LIỆU HƯỚNG DẪN">
+                  <div class="vf-service-card-overlay">
+                    <span>TRA CỨU TÀI LIỆU HƯỚNG DẪN</span>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
         </li>
-        <li>
-          <a href="<?php echo esc_url(home_url('/dich-vu-bao-duong/')); ?>">
-            Dịch vụ bảo dưỡng
-          </a>
-        </li>
-        <li>
-          <a href="<?php echo esc_url(home_url('/dich-vu-sua-chua/')); ?>">
-            Dịch vụ sửa chữa
-          </a>
-        </li>
-        <li>
-          <a href="<?php echo esc_url(home_url('/thong-tin-cuu-ho/')); ?>">
-            Thông tin cứu hộ
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- CỘT 3: 3 THẺ HÌNH ẢNH HÀNH ĐỘNG NỔI BẬT -->
-    <div class="vf-service-cards-col">
-      <a href="<?php echo esc_url(home_url('/dat-lich-dich-vu/')); ?>" class="vf-service-card">
-        <img src="<?php echo esc_url($uploads_url . '/service_booking_banner.png'); ?>" alt="ĐẶT LỊCH DỊCH VỤ">
-        <div class="vf-service-card-overlay">
-          <span>ĐẶT LỊCH DỊCH VỤ</span>
-        </div>
-      </a>
-
-      <a href="<?php echo esc_url(home_url('/tim-kiem-showroom-tram-sac/')); ?>" class="vf-service-card">
-        <img src="<?php echo esc_url($uploads_url . '/service_workshop_banner.png'); ?>" alt="TRA CỨU XƯỞNG DỊCH VỤ">
-        <div class="vf-service-card-overlay">
-          <span>TRA CỨU XƯỞNG DỊCH VỤ</span>
-        </div>
-      </a>
-
-      <a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/#warranty-book-dropdown')); ?>" class="vf-service-card">
-        <img src="<?php echo esc_url($uploads_url . '/service_manual_banner.png'); ?>" alt="TRA CỨU TÀI LIỆU HƯỚNG DẪN">
-        <div class="vf-service-card-overlay">
-          <span>TRA CỨU TÀI LIỆU HƯỚNG DẪN</span>
-        </div>
-      </a>
-    </div>
-
-  </div>
-</div>
-</li>
-*/ ?>
 
         <li class="menu-item"><a href="<?php echo esc_url(home_url('/pin-va-tram-sac/')); ?>">Pin và trạm sạc</a></li>
 
-        <!-- [TẠM ẨN] DỰ TOÁN & TRẢ GÓP - Mở lại khi cần -->
-        <?php /*
-<li class="menu-item"><a href="<?php echo esc_url(home_url('/du-toan-chi-phi/')); ?>">Dự toán & Trả góp</a></li>
-*/ ?>
+        <!-- DỰ TOÁN & TRẢ GÓP -->
+        <li class="menu-item"><a href="<?php echo esc_url(home_url('/du-toan-chi-phi/')); ?>">Dự toán & Trả góp</a></li>
 
-        <!-- [TẠM ẨN] SO SÁNH XE - Mở lại khi cần -->
-        <?php /*
-<li class="menu-item"><a href="<?php echo esc_url(home_url('/so-sanh-xe/')); ?>">So sánh xe</a></li>
-*/ ?>
+        <!-- SO SÁNH XE -->
+        <li class="menu-item"><a href="<?php echo esc_url(home_url('/so-sanh-xe/')); ?>">So sánh xe</a></li>
 
+        <!-- BÁO GIÁ LĂN BÁNH -->
         <li class="menu-item"><a href="<?php echo esc_url(home_url('/bao-gia-lan-banh/')); ?>">Báo giá lăn bánh</a></li>
-        <li class="menu-item"><a href="<?php echo esc_url(home_url('/chinh-sach-bao-mat/')); ?>">Chính sách bảo mật</a>
-        </li>
       </ul>
     </div>
 
@@ -320,7 +311,7 @@ $uploads_url = content_url('/uploads/official_cars/common');
     <!-- SEARCH BAR BOX AT TOP OF DRAWER -->
     <div class="vf-drawer-search-box">
       <form role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>" class="vf-drawer-search-form">
-        <input type="search" name="s" placeholder="Search..." required class="vf-drawer-search-input">
+        <input type="search" name="s" placeholder="Tìm kiếm xe, phụ kiện, dịch vụ..." required class="vf-drawer-search-input">
         <button type="submit" class="vf-drawer-search-btn" aria-label="Search">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
@@ -392,37 +383,45 @@ $uploads_url = content_url('/uploads/official_cars/common');
         </ul>
       </li>
 
-      <!-- [TẠM ẨN] PHỤ KIỆN XE - Mở lại khi cần -->
-      <?php /*
-<li>
-<a href="<?php echo esc_url(home_url('/phu-kien/')); ?>">PHỤ KIỆN XE</a>
-</li>
-*/ ?>
+      <!-- PHỤ KIỆN XE -->
+      <li>
+        <a href="<?php echo esc_url(home_url('/phu-kien/')); ?>">PHỤ KIỆN XE</a>
+      </li>
 
-      <!-- [TẠM ẨN] DỊCH VỤ HẬU MÃI - Mở lại khi cần -->
-      <?php /*
-<li class="vf-has-child">
-<div class="vf-menu-item-head">
-<a href="<?php echo esc_url(home_url('/dich-vu/')); ?>">DỊCH VỤ HẬU MÃI</a>
-<button class="vf-submenu-toggle" onclick="vfToggleSubmenu(this)" aria-label="Mở dịch vụ hậu mãi">
-  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-</button>
-</div>
-<ul class="vf-submenu">
-<li><a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/')); ?>">Chính sách bảo hành</a></li>
-<li><a href="<?php echo esc_url(home_url('/dich-vu-bao-duong/')); ?>">Dịch vụ bảo dưỡng</a></li>
-<li><a href="<?php echo esc_url(home_url('/dich-vu-sua-chua/')); ?>">Dịch vụ sửa chữa</a></li>
-<li><a href="<?php echo esc_url(home_url('/thong-tin-cuu-ho/')); ?>">Thông tin cứu hộ</a></li>
-<li><a href="<?php echo esc_url(home_url('/dat-lich-dich-vu/')); ?>">Đặt lịch dịch vụ</a></li>
-<li><a href="<?php echo esc_url(home_url('/tim-kiem-showroom-tram-sac/')); ?>">Tra cứu xưởng dịch vụ</a></li>
-<li><a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/#warranty-book-dropdown')); ?>">Tra cứu tài liệu hướng dẫn</a></li>
-</ul>
-</li>
-*/ ?>
+      <!-- DỊCH VỤ HẬU MÃI -->
+      <li class="vf-has-child">
+        <div class="vf-menu-item-head">
+          <a href="<?php echo esc_url(home_url('/dich-vu/')); ?>">DỊCH VỤ HẬU MÃI</a>
+          <button class="vf-submenu-toggle" onclick="vfToggleSubmenu(this)" aria-label="Mở dịch vụ hậu mãi">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+        <ul class="vf-submenu">
+          <li><a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/')); ?>">Chính sách bảo hành</a></li>
+          <li><a href="<?php echo esc_url(home_url('/dich-vu-bao-duong/')); ?>">Dịch vụ bảo dưỡng</a></li>
+          <li><a href="<?php echo esc_url(home_url('/dich-vu-sua-chua/')); ?>">Dịch vụ sửa chữa</a></li>
+          <li><a href="<?php echo esc_url(home_url('/thong-tin-cuu-ho/')); ?>">Thông tin cứu hộ</a></li>
+          <li><a href="<?php echo esc_url(home_url('/dat-lich-dich-vu/')); ?>">Đặt lịch dịch vụ</a></li>
+          <li><a href="<?php echo esc_url(home_url('/tim-kiem-showroom-tram-sac/')); ?>">Tra cứu xưởng dịch vụ</a></li>
+          <li><a href="<?php echo esc_url(home_url('/chinh-sach-bao-hanh/#warranty-book-dropdown')); ?>">Tra cứu tài liệu hướng dẫn</a></li>
+        </ul>
+      </li>
 
       <!-- PIN VÀ TRẠM SẠC -->
       <li>
         <a href="<?php echo esc_url(home_url('/pin-va-tram-sac/')); ?>">PIN VÀ TRẠM SẠC</a>
+      </li>
+
+      <!-- DỰ TOÁN & TRẢ GÓP -->
+      <li>
+        <a href="<?php echo esc_url(home_url('/du-toan-chi-phi/')); ?>">DỰ TOÁN & TRẢ GÓP</a>
+      </li>
+
+      <!-- SO SÁNH XE -->
+      <li>
+        <a href="<?php echo esc_url(home_url('/so-sanh-xe/')); ?>">SO SÁNH XE</a>
       </li>
 
       <!-- BÁO GIÁ LĂN BÁNH -->

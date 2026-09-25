@@ -502,6 +502,21 @@ $uploads_url = content_url('/uploads/official_cars/common');
     <span class="vf-float-tooltip">Chat Zalo</span>
     <span class="vf-pulse-wave"></span>
     <span class="vf-pulse-wave wave-delay"></span>
+</div>
+
+<!-- STICKY QUICK ACTION BAR CHO MOBILE (RULE 1) -->
+<div class="vf-sticky-bar-mobile">
+  <a href="tel:0973800616" class="vf-sticky-item phone">
+    <span class="icon">📞</span>
+    <span class="label">Gọi Ngay</span>
+  </a>
+  <a href="<?php echo esc_url(home_url('/du-toan-chi-phi/')); ?>" class="vf-sticky-item calc">
+    <span class="icon">📊</span>
+    <span class="label">Dự Toán</span>
+  </a>
+  <a href="<?php echo esc_url(home_url('/dang-ky-lai-thu/')); ?>" class="vf-sticky-item testdrive">
+    <span class="icon">🚗</span>
+    <span class="label">Lái Thử Ngay</span>
   </a>
 </div>
 
