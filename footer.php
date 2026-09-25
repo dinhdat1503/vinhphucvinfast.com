@@ -451,26 +451,6 @@ $uploads_url = content_url('/uploads/official_cars/common');
       display: none !important;
     }
 
-    .vf-sticky-bar-mobile {
-      display: flex !important;
-      position: fixed !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      z-index: 99999 !important;
-      background: rgba(255, 255, 255, 0.98) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      box-shadow: 0 -3px 16px rgba(0, 0, 0, 0.12) !important;
-      border-top: 1px solid #E2E8F0 !important;
-      height: calc(54px + env(safe-area-inset-bottom, 0px)) !important;
-      padding-bottom: env(safe-area-inset-bottom, 0px) !important;
-    }
-
-    body,
-    #wrapper {
-      padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
-    }
   }
 </style>
 
@@ -502,21 +482,6 @@ $uploads_url = content_url('/uploads/official_cars/common');
     <span class="vf-float-tooltip">Chat Zalo</span>
     <span class="vf-pulse-wave"></span>
     <span class="vf-pulse-wave wave-delay"></span>
-</div>
-
-<!-- STICKY QUICK ACTION BAR CHO MOBILE (RULE 1) -->
-<div class="vf-sticky-bar-mobile">
-  <a href="tel:0973800616" class="vf-sticky-item phone">
-    <span class="icon">📞</span>
-    <span class="label">Gọi Ngay</span>
-  </a>
-  <a href="<?php echo esc_url(home_url('/du-toan-chi-phi/')); ?>" class="vf-sticky-item calc">
-    <span class="icon">📊</span>
-    <span class="label">Dự Toán</span>
-  </a>
-  <a href="<?php echo esc_url(home_url('/dang-ky-lai-thu/')); ?>" class="vf-sticky-item testdrive">
-    <span class="icon">🚗</span>
-    <span class="label">Lái Thử Ngay</span>
   </a>
 </div>
 
