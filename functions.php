@@ -278,10 +278,16 @@ function vfvp_flood_fill_remove_bg($src_path, $dst_path)
 add_action('wp_enqueue_scripts', 'vfvp_enqueue_assets');
 function vfvp_enqueue_assets()
 {
+    // Dynamic cache-busting version based on file modification time
+    $style_path = get_stylesheet_directory() . '/style.css';
+    $js_path    = get_stylesheet_directory() . '/assets/js/main.js';
+    $css_ver    = file_exists($style_path) ? filemtime($style_path) : time();
+    $js_ver     = file_exists($js_path) ? filemtime($js_path) : time();
+
     // Parent theme
     wp_enqueue_style('flatsome-parent', get_template_directory_uri() . '/style.css');
-    // Child theme
-    wp_enqueue_style('flatsome-child', get_stylesheet_directory_uri() . '/style.css', ['flatsome-parent'], time());
+    // Child theme with auto cache-busting version
+    wp_enqueue_style('flatsome-child', get_stylesheet_directory_uri() . '/style.css', ['flatsome-parent'], $css_ver);
     // Google Fonts (Mulish, Plus Jakarta Sans & Inter - Full Vietnamese Support)
     wp_enqueue_style('vfvp-fonts', 'https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300..900;1,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap', [], null);
     // Swiper.js
@@ -290,9 +296,9 @@ function vfvp_enqueue_assets()
     // GLightbox
     wp_enqueue_style('glightbox', 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css', [], '3');
     wp_enqueue_script('glightbox', 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js', [], '3', true);
-    // Child JS
-    wp_enqueue_script('vfvp-main', get_stylesheet_directory_uri() . '/assets/js/main.js', ['jquery', 'swiper-js'], time(), true);
-    wp_enqueue_script('vfvp-modal', get_stylesheet_directory_uri() . '/assets/js/vfvp-modal.js', [], time(), true);
+    // Child JS with auto cache-busting version
+    wp_enqueue_script('vfvp-main', get_stylesheet_directory_uri() . '/assets/js/main.js', ['jquery', 'swiper-js'], $js_ver, true);
+    wp_enqueue_script('vfvp-modal', get_stylesheet_directory_uri() . '/assets/js/vfvp-modal.js', [], $js_ver, true);
 
     // AJAX
     wp_localize_script('vfvp-main', 'vfvpAjax', [
@@ -304,6 +310,37 @@ function vfvp_enqueue_assets()
         'nonce' => wp_create_nonce('vfvp_ajax_nonce'),
     ]);
 }
+
+// ============================================================
+// 1A1. TỰ ĐỘNG XÓA BỘ NHỚ ĐỆM (AUTO PURGE CACHE) KHI CÓ CODE MỚI
+// ============================================================
+add_action('init', function () {
+    $style_file = get_stylesheet_directory() . '/style.css';
+    $code_version = file_exists($style_file) ? filemtime($style_file) : time();
+    $saved_version = get_option('vfvp_auto_purge_version', 0);
+
+    // Khi code được push lên hoặc truy cập có param ?purge_cache=1
+    $force_purge = isset($_GET['purge_cache']);
+
+    if ($code_version > $saved_version || $force_purge) {
+        update_option('vfvp_auto_purge_version', $code_version);
+
+        // 1. Xóa toàn bộ LiteSpeed Cache (LSCache)
+        if (defined('LSCWP_V') || class_exists('LiteSpeed\Purge')) {
+            do_action('litespeed_purge_all');
+        }
+
+        // 2. Xóa WordPress Object Cache / Redis
+        if (function_exists('wp_cache_flush')) {
+            wp_cache_flush();
+        }
+
+        // 3. Xóa OPcache của PHP trong RAM
+        if (function_exists('opcache_reset')) {
+            @opcache_reset();
+        }
+    }
+});
 
 // ============================================================
 // 1A2. ENSURE SERVICE BANNER ASSETS
