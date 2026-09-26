@@ -85,7 +85,7 @@ add_filter('wp_mail', function ($args) {
 });
 
 // --- CF7: Tự động chuẩn hóa và bảo vệ Email gửi về từ mọi Form (Báo giá, Lái thử, Phụ kiện, Liên hệ) ---
-add_filter('wpcf7_mail_components', function ($components, $contact_form) {
+add_filter('wpcf7_mail_components', function ($components, $contact_form, $mail_template = null) {
     // 1. Mặc định gửi tới toàn bộ danh sách VFVP_CONTACT_EMAILS
     $components['recipient'] = implode(', ', VFVP_CONTACT_EMAILS);
 
@@ -171,11 +171,15 @@ add_filter('wpcf7_mail_components', function ($components, $contact_form) {
         $body_lines[] = "==============================";
         $body_lines[] = "Email này được gửi từ " . $page_name . ".";
 
-        $components['body'] = implode("\n", $body_lines);
+        $plain_body = implode("\n", $body_lines);
+
+        // Xuống dòng chuẩn đẹp: Chuyển \n sang <br /> để email không bị dính thành 1 dòng khi xem trên Gmail
+        // Đặt font chữ sans-serif hiện đại, dễ đọc, tương thích 100% mọi trình duyệt và app Gmail
+        $components['body'] = '<div style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #222222;">' . nl2br(esc_html($plain_body)) . '</div>';
     }
 
     return $components;
-}, 10, 2);
+}, 10, 3);
 
 // Auto sync official logo from vftanuyen if not exists
 $vfg_logo_src = 'C:/Users/ngodi/Job Freelancer/Local Sites/vftanuyen/app/public/wp-content/uploads/2026/05/logovinf.jpg';
@@ -2964,13 +2968,14 @@ function vf_handle_lead_form_post() {
     $body_lines[] = "Email này được gửi từ trang Báo Giá Lăn Bánh.";
 
     $body = implode("\n", $body_lines);
+    $html_body = '<div style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #222222;">' . nl2br(esc_html($body)) . '</div>';
 
     $headers = [
-        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Type: text/html; charset=UTF-8',
         'From: Vinfast Vĩnh Phúc <' . VFVP_SMTP_USERNAME . '>',
         'Reply-To: ' . VFVP_SMTP_USERNAME
     ];
-    wp_mail($to, $subject, $body, $headers);
+    wp_mail($to, $subject, $html_body, $headers);
 
     $referer = wp_get_referer() ?: home_url('/bao-gia-lan-banh/');
     wp_redirect(add_query_arg('quote_sent', '1', $referer));
@@ -3367,14 +3372,15 @@ function vf_handle_acc_order_submission()
     $body_lines[] = "Email này được gửi từ trang Phụ Kiện Chính Hãng.";
 
     $body = implode("\n", $body_lines);
+    $html_body = '<div style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #222222;">' . nl2br(esc_html($body)) . '</div>';
 
     $headers = [
-        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Type: text/html; charset=UTF-8',
         'From: Vinfast Vĩnh Phúc <' . VFVP_SMTP_USERNAME . '>',
         'Reply-To: ' . VFVP_SMTP_USERNAME
     ];
 
-    wp_mail($to, $subject, $body, $headers);
+    wp_mail($to, $subject, $html_body, $headers);
 
     wp_send_json_success([
         'message' => 'Cảm ơn bạn ' . $name . '! Yêu cầu đặt mua "' . $prod_name . '" đã được gửi thành công về hệ thống VinFast Vĩnh Phúc. Chuyên viên tư vấn sẽ liên hệ với bạn qua SĐT ' . $phone . ' ngay.'

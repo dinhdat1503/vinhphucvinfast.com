@@ -57,15 +57,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vf_booking_nonce'])) 
         $body_lines[] = "Email này được gửi từ trang Đặt Lịch Dịch Vụ.";
 
         $body = implode("\n", $body_lines);
+        $html_body = '<div style="font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #222222;">' . nl2br(esc_html($body)) . '</div>';
 
         $from_email = defined('VFVP_SMTP_USERNAME') ? VFVP_SMTP_USERNAME : 'autovinfast686@gmail.com';
         $headers = [
-            'Content-Type: text/plain; charset=UTF-8',
+            'Content-Type: text/html; charset=UTF-8',
             'From: Vinfast Vĩnh Phúc <' . $from_email . '>',
             'Reply-To: ' . (!empty($email) ? $email : $from_email)
         ];
         
-        wp_mail($admin_email, $subject, $body, $headers);
+        wp_mail($admin_email, $subject, $html_body, $headers);
         $submitted = true;
         $msg_success = true;
     }
