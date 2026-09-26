@@ -435,11 +435,10 @@ function vfvp_get_charging_image_url($key)
         wp_mkdir_p($cars_dir);
     }
 
-    $exact_map = [
-        'charging_station_car.jpg' => 'https://vinhphucvinfast.com/wp-content/uploads/2025/09/anh-1-1722-768x432.jpg',
-        'charging_station_vgreen.jpg' => 'https://vinhphucvinfast.com/wp-content/uploads/2025/09/ap-gia-dien-kinh-doanh-cho-tram-sac-vneconomyautomotive-1-768x512.jpg',
-        'portable_charger.webp' => 'https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/mobile-charger.webp'
-    ];
+    // Check official_cars/common/ first
+    if (file_exists($cars_dir . '/common/' . $key) && filesize($cars_dir . '/common/' . $key) > 1000) {
+        return $cars_url . '/common/' . $key . '?v=' . filemtime($cars_dir . '/common/' . $key);
+    }
 
     $dest_file = $cars_dir . '/' . $key;
 

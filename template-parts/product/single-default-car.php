@@ -558,9 +558,8 @@ $car = $models_data[$car_key];
           <div class="vf-price-amount" id="carDynamicPrice"><?php echo esc_html($car['price_eco']); ?></div>
           <div style="font-size: 12px; color: #64748B;">*Ưu đãi hỗ trợ chi phí chuyển đổi xe xăng sang xe điện VinFast chính hãng</div>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <a href="<?php echo esc_url(home_url('/mua-xe-tra-gop/')); ?>" class="vf-btn vf-btn-outline">DỰ TOÁN CHI PHÍ</a>
-          <a href="<?php echo esc_url(home_url('/dat-coc/')); ?>" class="vf-btn vf-btn-primary">ĐẶT CỌC ONLINE</a>
+        <div>
+          <a href="<?php echo esc_url(home_url('/mua-xe-tra-gop/')); ?>" class="vf-btn vf-btn-primary">DỰ TOÁN CHI PHÍ</a>
         </div>
       </div>
 

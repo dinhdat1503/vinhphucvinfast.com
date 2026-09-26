@@ -878,11 +878,8 @@ $uploads_url = content_url('/uploads/official_cars/mpv7');
           <div class="vf9-price-amount" id="mpv7DynamicPrice">750.000.000 VNĐ</div>
           <div style="font-size: 12px; color: #64748B;">*Miễn 100% lệ phí trước bạ xe điện 7 chỗ</div>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <a href="<?php echo esc_url(home_url('/du-toan/')); ?>" class="vf-btn vf-btn-outline">DỰ TOÁN CHI
-            PHÍ</a>
-          <button class="vf-btn vf-btn-primary" onclick="if(typeof vfOpenQuoteModal==='function'){vfOpenQuoteModal('VinFast VF MPV 7')}else{alert('Đã gửi yêu cầu tư vấn xe VinFast MPV 7!')}">ĐẶT MUA XE 7
-            CHỖ</button>
+        <div>
+          <a href="<?php echo esc_url(home_url('/du-toan/')); ?>" class="vf-btn vf-btn-primary">DỰ TOÁN CHI PHÍ</a>
         </div>
       </div>
 

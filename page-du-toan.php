@@ -876,9 +876,9 @@ get_header();
             <button type="button" class="vf-btn vf-btn-outline" onclick="vfExportPDF()" style="background:#0284c7; color:#fff; border-color:#0284c7;">
               🖨️ TẢI FILE PDF
             </button>
-            <button type="button" class="vf-btn vf-btn-outline" onclick="vfOpenModal('lai-thu')" style="grid-column: span 2;">
+            <a href="<?php echo esc_url(home_url('/dang-ky-lai-thu/')); ?>" class="vf-btn vf-btn-outline" style="grid-column: span 2; display: flex; align-items: center; justify-content: center; text-decoration: none;">
               ĐĂNG KÝ LÁI THỬ TẠI VĨNH PHÚC
-            </button>
+            </a>
           </div>
 
         </div>

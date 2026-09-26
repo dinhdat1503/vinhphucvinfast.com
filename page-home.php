@@ -469,13 +469,13 @@ if (!empty($accessories)):
       <!-- Left Column Cards -->
       <div class="vf-charging-left">
         <!-- Card 1: Trạm sạc ô tô điện -->
-        <a href="<?php echo esc_url(home_url('/dich-vu-pin-oto-dien/')); ?>" class="vf-charging-card" style="display:block; text-decoration:none; background: linear-gradient(180deg, rgba(15,23,42,0.1) 0%, rgba(15,23,42,0.85) 100%), url('https://vinhphucvinfast.com/wp-content/uploads/2025/09/anh-1-1722-768x432.jpg') center/cover no-repeat;">
+        <a href="<?php echo esc_url(home_url('/dich-vu-pin-oto-dien/')); ?>" class="vf-charging-card" style="display:block; text-decoration:none; background: linear-gradient(180deg, rgba(15,23,42,0.1) 0%, rgba(15,23,42,0.85) 100%), url('<?php echo esc_url(vfvp_get_charging_image_url('charging_station_car.jpg')); ?>') center/cover no-repeat;">
           <div class="vf-charging-card-overlay">
             <h3 class="vf-charging-card-title">Pin & Trạm sạc ô tô điện</h3>
           </div>
         </a>
         <!-- Card 2: Giải pháp năng lượng V-GREEN -->
-        <a href="<?php echo esc_url(home_url('/tim-kiem-showroom-tram-sac/')); ?>" class="vf-charging-card" style="display:block; text-decoration:none; background: linear-gradient(180deg, rgba(15,23,42,0.1) 0%, rgba(15,23,42,0.85) 100%), url('https://vinhphucvinfast.com/wp-content/uploads/2025/09/ap-gia-dien-kinh-doanh-cho-tram-sac-vneconomyautomotive-1-768x512.jpg') center/cover no-repeat;">
+        <a href="<?php echo esc_url(home_url('/tim-kiem-showroom-tram-sac/')); ?>" class="vf-charging-card" style="display:block; text-decoration:none; background: linear-gradient(180deg, rgba(15,23,42,0.1) 0%, rgba(15,23,42,0.85) 100%), url('<?php echo esc_url(vfvp_get_charging_image_url('charging_station_vgreen.jpg')); ?>') center/cover no-repeat;">
           <div class="vf-charging-card-overlay">
             <h3 class="vf-charging-card-title">Hệ thống trạm sạc V-GREEN phủ rộng toàn quốc</h3>
           </div>

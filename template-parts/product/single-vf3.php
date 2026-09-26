@@ -252,9 +252,8 @@ $uploads_url = content_url('/uploads/official_cars/vf3');
           <div class="vf9-price-amount" id="vf3DynamicPrice">285.000.000 VNĐ</div>
           <div style="font-size: 12px; color: #64748B;">*Ưu đãi hỗ trợ chi phí chuyển đổi xe xăng sang xe điện VinFast chính hãng</div>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <a href="<?php echo esc_url(home_url('/mua-xe-tra-gop/')); ?>" class="vf-btn vf-btn-outline">DỰ TOÁN CHI PHÍ</a>
-          <button class="vf-btn vf-btn-primary" onclick="alert('Đã gửi yêu cầu tư vấn đặt cọc VinFast VF 3!')">ĐẶT CỌC ONLINE</button>
+        <div>
+          <a href="<?php echo esc_url(home_url('/mua-xe-tra-gop/')); ?>" class="vf-btn vf-btn-primary">DỰ TOÁN CHI PHÍ</a>
         </div>
       </div>
 

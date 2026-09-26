@@ -1051,11 +1051,8 @@ $uploads_url = content_url('/uploads/official_cars/vf6');
           <div style="font-size: 12px; color: #64748B;">*Áp dụng ưu đãi miễn 100% lệ phí trước bạ và quà tặng bảo dưỡng
             chính hãng</div>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <a href="<?php echo esc_url(home_url('/du-toan-tra-gop/')); ?>" class="vf-btn vf-btn-outline">DỰ TOÁN CHI
-            PHÍ</a>
-          <button class="vf-btn vf-btn-primary" onclick="alert('Đã gửi yêu cầu tư vấn đặt cọc VinFast VF 6!')">ĐẶT CỌC
-            ONLINE</button>
+        <div>
+          <a href="<?php echo esc_url(home_url('/du-toan-tra-gop/')); ?>" class="vf-btn vf-btn-primary">DỰ TOÁN CHI PHÍ</a>
         </div>
       </div>
 

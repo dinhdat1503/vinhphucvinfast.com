@@ -1055,11 +1055,8 @@ $uploads_url = content_url('/uploads/official_cars/vf8');
           <div style="font-size: 12px; color: #64748B;">*Miễn 100% lệ phí trước bạ, tặng gói giải trí thông minh VF
             Online</div>
         </div>
-        <div style="display: flex; gap: 12px;">
-          <a href="<?php echo esc_url(home_url('/du-toan-tra-gop/')); ?>" class="vf-btn vf-btn-outline">DỰ TOÁN CHI
-            PHÍ</a>
-          <button class="vf-btn vf-btn-primary" onclick="alert('Đã gửi yêu cầu tư vấn đặt cọc VinFast VF 8!')">ĐẶT CỌC
-            ONLINE</button>
+        <div>
+          <a href="<?php echo esc_url(home_url('/du-toan-tra-gop/')); ?>" class="vf-btn vf-btn-primary">DỰ TOÁN CHI PHÍ</a>
         </div>
       </div>
 
