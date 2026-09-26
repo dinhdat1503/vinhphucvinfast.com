@@ -5053,6 +5053,248 @@ button.vf-btn-secondary:hover * {
 }
 
 /* ============================================================
+ * CHUẨN HÓA CÁC KHỐI THÔNG TIN SẢN PHẨM (STATS, CARDS, TECH)
+ * TỐI ƯU HIỆN RÕ KHỐI & CÂN BẰNG GIỮA TRÊN MOBILE & DESKTOP
+ * ============================================================ */
+.vf9-stat-box,
+.vf-stat-box {
+  background: #ffffff !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-top: 3.5px solid #2563EB !important;
+  border-radius: 14px !important;
+  padding: 30px 20px !important;
+  text-align: center !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-sizing: border-box !important;
+}
+
+.vf9-stat-box:hover,
+.vf-stat-box:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 18px 30px -8px rgba(37, 99, 235, 0.18) !important;
+  border-color: #93C5FD !important;
+}
+
+.vf9-stat-val,
+.vf-stat-val {
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem) !important;
+  font-weight: 900 !important;
+  color: #2563EB !important;
+  line-height: 1.1 !important;
+  margin-bottom: 8px !important;
+  letter-spacing: -0.5px !important;
+}
+
+.vf9-stat-lbl,
+.vf-stat-lbl {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #475569 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.6px !important;
+  line-height: 1.35 !important;
+}
+
+.vf9-card,
+.vf-card {
+  background: #ffffff !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.07) !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  transition: all 0.3s ease !important;
+}
+
+.vf9-card:hover,
+.vf-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 35px -8px rgba(15, 23, 42, 0.14) !important;
+  border-color: #93C5FD !important;
+}
+
+.vf9-tech-item,
+.vf-tech-item {
+  background: #ffffff !important;
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.07) !important;
+  box-sizing: border-box !important;
+  transition: all 0.25s ease !important;
+}
+
+.vf9-tech-item:hover,
+.vf-tech-item:hover {
+  border-color: #93C5FD !important;
+  box-shadow: 0 14px 28px -6px rgba(37, 99, 235, 0.12) !important;
+}
+
+.vf9-privilege-banner {
+  border-radius: 18px !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+  box-sizing: border-box !important;
+}
+
+.vf9-specs-table-wrap,
+.vf-calc-wrap {
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07) !important;
+  box-sizing: border-box !important;
+}
+
+/* RESPONSIVE TABLET CHO TOÀN BỘ KHỐI THÔNG TIN */
+@media (max-width: 991px) {
+  .vf9-perf-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+  .vf9-grid-3,
+  .vf9-tech-grid,
+  .vf9-privilege-banner {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* RESPONSIVE MOBILE CHO TOÀN BỘ KHỐI THÔNG TIN - CÂN BẰNG GIỮA & KHÔNG TRÀN LỀ */
+@media (max-width: 768px) {
+  .vf9-section,
+  .vf9-section-alt {
+    padding: 44px 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  .vf9-section .container,
+  .vf9-section-alt .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .vf9-sec-head {
+    text-align: center !important;
+    margin: 0 auto 26px !important;
+    padding: 0 6px !important;
+  }
+
+  .vf9-sec-title {
+    font-size: 1.55rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .vf9-sec-desc {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* KHỐI 4 Ô THÔNG SỐ VẬN HÀNH: CÂN ĐỐI 2X2 Ở GIỮA, KHÔNG TRÀN MÀN HÌNH */
+  .vf9-perf-stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin: 20px auto 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .vf9-stat-box,
+  .vf-stat-box {
+    padding: 18px 8px !important;
+    border-radius: 12px !important;
+    border-top: 3.5px solid #2563EB !important;
+    min-width: 0 !important;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .vf9-stat-val,
+  .vf-stat-val {
+    font-size: 1.65rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 5px !important;
+    white-space: nowrap !important;
+  }
+
+  .vf9-stat-lbl,
+  .vf-stat-lbl {
+    font-size: 10.5px !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0.2px !important;
+    padding: 0 2px !important;
+    text-align: center !important;
+  }
+
+  /* KHỐI CARD TÍNH NĂNG / TRẠM SẠC */
+  .vf9-grid-3 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    margin-top: 24px !important;
+    width: 100% !important;
+  }
+
+  .vf9-card,
+  .vf-card {
+    width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 12px !important;
+  }
+
+  .vf9-card-img {
+    height: 200px !important;
+  }
+
+  .vf9-card-body {
+    padding: 18px 16px !important;
+  }
+
+  /* KHỐI CÔNG NGHỆ TRỢ LÁI ADAS */
+  .vf9-tech-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-top: 20px !important;
+    width: 100% !important;
+  }
+
+  .vf9-tech-item {
+    padding: 16px !important;
+    gap: 14px !important;
+    border-radius: 12px !important;
+  }
+
+  /* KHỐI ĐẶC QUYỀN */
+  .vf9-privilege-banner {
+    padding: 28px 18px !important;
+    border-radius: 14px !important;
+    margin-top: 24px !important;
+    gap: 20px !important;
+  }
+
+  /* KHỐI BẢNG THÔNG SỐ */
+  .vf9-specs-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 12px !important;
+  }
+
+  .vf9-specs-table td {
+    padding: 12px 14px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* ============================================================
  * CUSTOM FOOTER VINFAST VĨNH PHÚC & MOBILE STICKY BAR
  * ============================================================ */
 .vf-footer {
