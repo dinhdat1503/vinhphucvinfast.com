@@ -31,10 +31,10 @@ add_action('init', function() {
 // Thêm email vào mảng bên dưới để nhận đồng thời nhiều địa chỉ
 // =========================================================
 define('VFVP_CONTACT_EMAILS', [
-    'ngodinhdat15@gmail.com',
     'autovinfast686@gmail.com',
-    'mlien3267@gmail.com',
+    'ngodinhdat15@gmail.com',
     'phuocvandangdilam@gmail.com',
+    'mlien3267@gmail.com',
     'hoangbuizzzz15@gmail.com',
 ]);
 
@@ -43,8 +43,8 @@ define('VFVP_CONTACT_EMAILS', [
 // Hướng dẫn tạo App Password: myaccount.google.com → Security → App passwords
 define('VFVP_SMTP_HOST', 'smtp.gmail.com');
 define('VFVP_SMTP_PORT', 587);
-define('VFVP_SMTP_USERNAME', 'ngodinhdat15@gmail.com');
-define('VFVP_SMTP_PASSWORD', 'upbhrveakklifbri'); // Gmail App Password
+define('VFVP_SMTP_USERNAME', 'autovinfast686@gmail.com');
+define('VFVP_SMTP_PASSWORD', 'lkncyiwenlzmxoqa'); // Gmail App Password của autovinfast686@gmail.com
 define('VFVP_SMTP_ENABLED', true);  // SMTP đang hoạt động
 
 add_action('phpmailer_init', function ($phpmailer) {
@@ -58,8 +58,16 @@ add_action('phpmailer_init', function ($phpmailer) {
     $phpmailer->Password = VFVP_SMTP_PASSWORD;
     $phpmailer->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
     $phpmailer->From = VFVP_SMTP_USERNAME;
-    $phpmailer->FromName = 'VinFast Vĩnh Phúc';
+    $phpmailer->FromName = 'Vinfast Vĩnh Phúc';
     $phpmailer->SMTPOptions = ['ssl' => ['verify_peer' => false, 'verify_peer_name' => false]];
+});
+
+add_filter('wp_mail_from', function ($email) {
+    return VFVP_SMTP_USERNAME;
+});
+
+add_filter('wp_mail_from_name', function ($name) {
+    return 'Vinfast Vĩnh Phúc';
 });
 
 // --- Đảm bảo wp_mail luôn gửi đến toàn bộ danh sách email ---
@@ -78,15 +86,8 @@ add_filter('wp_mail', function ($args) {
 
 // --- CF7: Tự động chuẩn hóa và bảo vệ Email gửi về từ mọi Form (Báo giá, Lái thử, Phụ kiện, Liên hệ) ---
 add_filter('wpcf7_mail_components', function ($components, $contact_form) {
-    // Nếu trong CF7 admin người dùng đã cấu hình nhiều email ở mục To, giữ nguyên
-    $current_to = trim($components['recipient'] ?? '');
-    if (!empty($current_to) && strpos($current_to, ',') !== false) {
-        // Đã có danh sách nhiều email từ admin CF7
-    } else {
-        // Mặc định gửi tới toàn bộ danh sách VFVP_CONTACT_EMAILS
-        $components['recipient'] = implode(', ', VFVP_CONTACT_EMAILS);
-    }
-    $additional = '';
+    // 1. Mặc định gửi tới toàn bộ danh sách VFVP_CONTACT_EMAILS
+    $components['recipient'] = implode(', ', VFVP_CONTACT_EMAILS);
 
     // 2. Lấy dữ liệu thực tế từ Submission an toàn (hỗ trợ cả array lẫn string từ select/checkbox)
     $submission = class_exists('WPCF7_Submission') ? WPCF7_Submission::get_instance() : null;
@@ -101,57 +102,76 @@ add_filter('wpcf7_mail_components', function ($components, $contact_form) {
             return is_string($v) ? trim($v) : '';
         };
 
-        $name        = $safe_get('your-name');
-        $phone       = $safe_get('your-tel') ?: $safe_get('your-phone');
-        $car         = $safe_get('car-model') ?: $safe_get('your-car');
-        $accessory   = $safe_get('accessory-name');
-        $acc_price   = $safe_get('accessory-price');
-        $payment     = $safe_get('payment-method');
-        $message     = $safe_get('your-message');
-        $email       = $safe_get('your-email');
+        $name        = $safe_get('your-name') ?: $safe_get('name') ?: $safe_get('ho-ten');
+        $phone       = $safe_get('your-tel') ?: $safe_get('your-phone') ?: $safe_get('phone') ?: $safe_get('so-dien-thoai');
+        $car         = $safe_get('car-model') ?: $safe_get('your-car') ?: $safe_get('dong-xe');
+        $accessory   = $safe_get('accessory-name') ?: $safe_get('phu-kien');
+        $acc_price   = $safe_get('accessory-price') ?: $safe_get('gia-phu-kien');
+        $payment     = $safe_get('payment-method') ?: $safe_get('hinh-thuc-mua') ?: $safe_get('phuong-thuc');
+        $test_date   = $safe_get('ngay-lai') ?: $safe_get('ngay-du-kien') ?: $safe_get('lai-thu-date') ?: $safe_get('date');
+        $message     = $safe_get('your-message') ?: $safe_get('ghi-chu') ?: $safe_get('message');
+        $email       = $safe_get('your-email') ?: $safe_get('email');
 
-        // Chỉ thêm Reply-To nếu là email hợp lệ (tránh chèn số điện thoại vào Reply-To gây lỗi header)
-        if (!empty($email) && is_email($email)) {
-            $additional .= "Reply-To: " . $email . "\n";
-        }
-        $components['additional_headers'] = trim($additional);
+        // Headers: Reply-To
+        $reply_to = (!empty($email) && is_email($email)) ? $email : VFVP_SMTP_USERNAME;
+        $components['additional_headers'] = "Reply-To: " . $reply_to;
 
-        // 3. Khắc phục Subject: nếu có [your-subject] chưa replace hoặc subject mặc định CF7
+        // 3. Chuẩn hóa Subject theo đúng mẫu: [Loại yêu cầu]: [Tên khách] - [Dòng xe / Phụ kiện]
         $form_title = method_exists($contact_form, 'title') ? $contact_form->title() : 'Yêu cầu';
-        if (strpos($components['subject'], '[your-subject]') !== false || strpos($components['subject'], 'Contact form') !== false || empty($components['subject'])) {
-            $lead_name = $name ?: 'Khách hàng';
-            $lead_phone = $phone ? ' - ' . $phone : '';
-            if (!empty($accessory)) {
-                $components['subject'] = '[ĐẶT PHỤ KIỆN] ' . $lead_name . $lead_phone . ' đặt mua ' . $accessory;
-            } elseif (mb_strpos(mb_strtolower($form_title), 'lái thử') !== false) {
-                $components['subject'] = '[LÁI THỬ] ' . $lead_name . $lead_phone . ' đăng ký lái thử ' . ($car ?: 'xe VinFast');
-            } else {
-                $components['subject'] = '[BÁO GIÁ] ' . $lead_name . $lead_phone . ' yêu cầu báo giá ' . ($car ?: 'xe VinFast');
-            }
+        $lead_name = $name ?: 'Khách hàng';
+        $lead_car = $car ?: 'VinFast VF 3';
+
+        if (!empty($accessory)) {
+            $components['subject'] = 'Đặt mua phụ kiện: ' . $lead_name . ' - ' . $accessory;
+            $lead_action = 'đặt mua phụ kiện:';
+            $page_name = 'trang Phụ Kiện Chính Hãng';
+        } elseif (mb_strpos(mb_strtolower($form_title), 'lái thử') !== false) {
+            $components['subject'] = 'Đăng ký lái thử: ' . $lead_name . ' - ' . $lead_car;
+            $lead_action = 'đăng ký lái thử:';
+            $page_name = 'trang Đăng Ký Lái Thử';
+        } elseif (mb_strpos(mb_strtolower($form_title), 'trả góp') !== false || mb_strpos(mb_strtolower($form_title), 'dự toán') !== false) {
+            $components['subject'] = 'Dự toán trả góp: ' . $lead_name . ' - ' . $lead_car;
+            $lead_action = 'yêu cầu dự toán trả góp:';
+            $page_name = 'trang Dự Toán Chi Phí & Trả Góp';
+        } else {
+            $components['subject'] = 'Báo giá lăn bánh: ' . $lead_name . ' - ' . $lead_car;
+            $lead_action = 'yêu cầu báo giá lăn bánh:';
+            $page_name = 'trang Báo Giá Lăn Bánh';
         }
 
-        // 4. Khắc phục Body: Nếu body dính [your-email] chưa replace hoặc thiếu số điện thoại
-        if (strpos($components['body'], '[your-email]') !== false || strpos($components['body'], '[your-subject]') !== false || (!empty($phone) && strpos($components['body'], $phone) === false)) {
-            $body_lines = [];
-            $body_lines[] = "==================================================";
-            $body_lines[] = " THÔNG TIN YÊU CẦU: " . mb_strtoupper($form_title);
-            $body_lines[] = "==================================================";
-            if ($name)      $body_lines[] = "• Họ và tên        : " . $name;
-            if ($phone)     $body_lines[] = "• Số điện thoại    : " . $phone;
-            if ($email)     $body_lines[] = "• Email            : " . $email;
-            if ($accessory) $body_lines[] = "• Phụ kiện         : " . $accessory;
-            if ($acc_price) $body_lines[] = "• Giá tham khảo    : " . $acc_price;
-            if ($car)       $body_lines[] = "• Dòng xe quan tâm : " . $car;
-            if ($payment)   $body_lines[] = "• Phương thức TT   : " . $payment;
-            if ($message)   $body_lines[] = "• Ghi chú / Lời nhắn:\n  " . $message;
-            $body_lines[] = "--------------------------------------------------";
-            $body_lines[] = "Thời gian gửi: " . date_i18n('d/m/Y H:i:s');
-            $body_lines[] = "Trang gửi    : " . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : home_url());
-            $body_lines[] = "Nguồn web    : " . home_url();
-            $body_lines[] = "\n--- VinFast VFG Vĩnh Phúc ---";
-
-            $components['body'] = implode("\n", $body_lines);
+        // 4. Chuẩn hóa Body đồng bộ cho TẤT CẢ các form đúng như mẫu ảnh
+        $body_lines = [];
+        $body_lines[] = "Chào Admin, có khách hàng " . $lead_action . "\n";
+        $body_lines[] = "==============================";
+        $body_lines[] = "THÔNG TIN KHÁCH HÀNG:";
+        $body_lines[] = "- Họ và tên: " . ($name ?: 'Chưa cung cấp');
+        $body_lines[] = "- Số điện thoại: " . ($phone ?: 'Chưa cung cấp');
+        if (!empty($email)) {
+            $body_lines[] = "- Email: " . $email;
         }
+        $body_lines[] = "==============================";
+        $body_lines[] = "THÔNG TIN ĐĂNG KÝ:";
+        if ($car) {
+            $body_lines[] = "- Dòng xe quan tâm: " . $car;
+        }
+        if ($accessory) {
+            $body_lines[] = "- Phụ kiện đặt: " . $accessory;
+        }
+        if ($acc_price) {
+            $body_lines[] = "- Giá tham khảo: " . $acc_price;
+        }
+        if ($test_date) {
+            $body_lines[] = "- Ngày dự kiến lái: " . $test_date;
+        }
+        if ($payment) {
+            $body_lines[] = "- Hình thức mua: " . $payment;
+        }
+        $body_lines[] = "- Ghi chú thêm:";
+        $body_lines[] = !empty($message) ? $message : "[ghichu]";
+        $body_lines[] = "==============================";
+        $body_lines[] = "Email này được gửi từ " . $page_name . ".";
+
+        $components['body'] = implode("\n", $body_lines);
     }
 
     return $components;
@@ -2923,20 +2943,32 @@ function vf_handle_lead_form_post() {
     $message = sanitize_textarea_field($_POST['your-message'] ?? '');
 
     $to = implode(', ', VFVP_CONTACT_EMAILS);
-    $subject = '[BÁO GIÁ] ' . ($name ?: 'Khách hàng') . ($phone ? ' - ' . $phone : '') . ' yêu cầu báo giá ' . $car;
-    $body = "=== YÊU CẦU BÁO GIÁ XE VINFAST VĨNH PHÚC ===\n\n";
-    $body .= "Họ và tên     : " . $name . "\n";
-    $body .= "Số điện thoại : " . $phone . "\n";
-    $body .= "Dòng xe       : " . $car . "\n";
-    $body .= "Phương thức   : " . $payment . "\n";
-    $body .= "Ghi chú       : " . $message . "\n\n";
-    $body .= "Thời gian gửi : " . date_i18n('d/m/Y H:i:s') . "\n";
-    $body .= "Trang gửi     : " . (wp_get_referer() ?: home_url()) . "\n";
-    $body .= "\n--- VinFast Vĩnh Phúc ---";
+    $lead_car = $car ?: 'VinFast VF 3';
+    $subject = 'Báo giá lăn bánh: ' . ($name ?: 'Khách hàng') . ' - ' . $lead_car;
+
+    $body_lines = [];
+    $body_lines[] = "Chào Admin, có khách hàng yêu cầu báo giá lăn bánh:\n";
+    $body_lines[] = "==============================";
+    $body_lines[] = "THÔNG TIN KHÁCH HÀNG:";
+    $body_lines[] = "- Họ và tên: " . ($name ?: 'Chưa cung cấp');
+    $body_lines[] = "- Số điện thoại: " . ($phone ?: 'Chưa cung cấp');
+    $body_lines[] = "==============================";
+    $body_lines[] = "THÔNG TIN ĐĂNG KÝ:";
+    $body_lines[] = "- Dòng xe quan tâm: " . $lead_car;
+    if ($payment) {
+        $body_lines[] = "- Hình thức mua: " . $payment;
+    }
+    $body_lines[] = "- Ghi chú thêm:";
+    $body_lines[] = !empty($message) ? $message : "[ghichu]";
+    $body_lines[] = "==============================";
+    $body_lines[] = "Email này được gửi từ trang Báo Giá Lăn Bánh.";
+
+    $body = implode("\n", $body_lines);
 
     $headers = [
         'Content-Type: text/plain; charset=UTF-8',
-        'From: VinFast Vĩnh Phúc <noreply@vinhphucvinfast.com>'
+        'From: Vinfast Vĩnh Phúc <' . VFVP_SMTP_USERNAME . '>',
+        'Reply-To: ' . VFVP_SMTP_USERNAME
     ];
     wp_mail($to, $subject, $body, $headers);
 
@@ -3312,22 +3344,34 @@ function vf_handle_acc_order_submission()
     }
 
     $to = implode(', ', VFVP_CONTACT_EMAILS);
-    $subject = '[ĐẶT MUA PHỤ KIỆN] ' . $prod_name . ' - ' . $name . ' (' . $phone . ')';
+    $subject = 'Đặt mua phụ kiện: ' . ($name ?: 'Khách hàng') . ' - ' . $prod_name;
 
-    $body = "YÊU CẦU ĐẶT MUA PHỤ KIỆN TỪ WEBSITE VINFAST VĨNH PHÚC\n";
-    $body .= "--------------------------------------------------\n";
-    $body .= "Sản phẩm phụ kiện: " . $prod_name . "\n";
-    $body .= "Giá tham khảo: " . $prod_price . "\n";
-    $body .= "Họ và tên khách hàng: " . $name . "\n";
-    $body .= "Số điện thoại: " . $phone . "\n";
-    $body .= "Dòng xe đang sử dụng: " . $car_model . "\n";
-    $body .= "Ghi chú / Yêu cầu: " . ($note ? $note : 'Không có') . "\n";
-    $body .= "Thời gian gửi: " . date_i18n('Y-m-d H:i:s') . "\n";
-    $body .= "--------------------------------------------------\n";
+    $body_lines = [];
+    $body_lines[] = "Chào Admin, có khách hàng đặt mua phụ kiện:\n";
+    $body_lines[] = "==============================";
+    $body_lines[] = "THÔNG TIN KHÁCH HÀNG:";
+    $body_lines[] = "- Họ và tên: " . ($name ?: 'Chưa cung cấp');
+    $body_lines[] = "- Số điện thoại: " . ($phone ?: 'Chưa cung cấp');
+    $body_lines[] = "==============================";
+    $body_lines[] = "THÔNG TIN ĐĂNG KÝ:";
+    $body_lines[] = "- Phụ kiện đặt: " . $prod_name;
+    if ($prod_price) {
+        $body_lines[] = "- Giá tham khảo: " . $prod_price;
+    }
+    if ($car_model) {
+        $body_lines[] = "- Dòng xe đang sử dụng: " . $car_model;
+    }
+    $body_lines[] = "- Ghi chú thêm:";
+    $body_lines[] = !empty($note) ? $note : "[ghichu]";
+    $body_lines[] = "==============================";
+    $body_lines[] = "Email này được gửi từ trang Phụ Kiện Chính Hãng.";
+
+    $body = implode("\n", $body_lines);
 
     $headers = [
         'Content-Type: text/plain; charset=UTF-8',
-        'From: VinFast Vĩnh Phúc <wordpress@' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost') . '>'
+        'From: Vinfast Vĩnh Phúc <' . VFVP_SMTP_USERNAME . '>',
+        'Reply-To: ' . VFVP_SMTP_USERNAME
     ];
 
     wp_mail($to, $subject, $body, $headers);

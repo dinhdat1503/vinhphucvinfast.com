@@ -26,29 +26,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['vf_booking_nonce'])) 
         $time       = sanitize_text_field($_POST['booking_time'] ?? '');
 
         $admin_email = get_option('admin_email');
-        $subject = "[ĐẶT LỊCH DỊCH VỤ] Đơn mới từ " . $fullname . " - " . $phone;
+        $subject = 'Đặt lịch dịch vụ: ' . ($fullname ?: 'Khách hàng') . ' - ' . ($car_model ?: 'Xe VinFast');
         
-        $body = "THÔNG TIN ĐẶT LỊCH DỊCH VỤ VINFAST VĨNH PHÚC\n";
-        $body .= "----------------------------------------\n";
-        $body .= "1. THÔNG TIN KHÁCH HÀNG:\n";
-        $body .= "- Họ tên: " . $fullname . "\n";
-        $body .= "- Số điện thoại: " . $phone . "\n";
-        $body .= "- Email: " . $email . "\n\n";
+        $body_lines = [];
+        $body_lines[] = "Chào Admin, có khách hàng đặt lịch dịch vụ:\n";
+        $body_lines[] = "==============================";
+        $body_lines[] = "THÔNG TIN KHÁCH HÀNG:";
+        $body_lines[] = "- Họ và tên: " . ($fullname ?: 'Chưa cung cấp');
+        $body_lines[] = "- Số điện thoại: " . ($phone ?: 'Chưa cung cấp');
+        if (!empty($email)) {
+            $body_lines[] = "- Email: " . $email;
+        }
+        $body_lines[] = "==============================";
+        $body_lines[] = "THÔNG TIN ĐĂNG KÝ:";
+        $body_lines[] = "- Dòng xe: " . ($car_model ?: 'Xe VinFast');
+        if ($mileage) {
+            $body_lines[] = "- Số Km: " . $mileage;
+        }
+        if ($plate) {
+            $body_lines[] = "- Biển số xe: " . $plate;
+        }
+        if (!empty($services)) {
+            $body_lines[] = "- Dịch vụ yêu cầu: " . implode(', ', $services);
+        }
+        $body_lines[] = "- Địa điểm: " . $province . " (" . $location_type . ")";
+        $body_lines[] = "- Thời gian hẹn: " . $date . " lúc " . $time;
+        $body_lines[] = "- Ghi chú thêm:";
+        $body_lines[] = !empty($note) ? $note : "[ghichu]";
+        $body_lines[] = "==============================";
+        $body_lines[] = "Email này được gửi từ trang Đặt Lịch Dịch Vụ.";
 
-        $body .= "2. THÔNG TIN XE:\n";
-        $body .= "- Mẫu xe: " . $car_model . "\n";
-        $body .= "- Số Km: " . $mileage . "\n";
-        $body .= "- Biển số xe: " . $plate . "\n\n";
+        $body = implode("\n", $body_lines);
 
-        $body .= "3. DỊCH VỤ YÊU CẦU:\n";
-        $body .= "- Dịch vụ: " . implode(', ', $services) . "\n";
-        $body .= "- Ghi chú: " . $note . "\n\n";
-
-        $body .= "4. ĐỊA ĐIỂM & THỜI GIAN:\n";
-        $body .= "- Địa điểm: " . $province . " (" . $location_type . ")\n";
-        $body .= "- Thời gian: " . $date . " lúc " . $time . "\n";
-
-        $headers = ['Content-Type: text/plain; charset=UTF-8', 'From: VinFast Vĩnh Phúc <no-reply@' . $_SERVER['HTTP_HOST'] . '>'];
+        $from_email = defined('VFVP_SMTP_USERNAME') ? VFVP_SMTP_USERNAME : 'autovinfast686@gmail.com';
+        $headers = [
+            'Content-Type: text/plain; charset=UTF-8',
+            'From: Vinfast Vĩnh Phúc <' . $from_email . '>',
+            'Reply-To: ' . (!empty($email) ? $email : $from_email)
+        ];
         
         wp_mail($admin_email, $subject, $body, $headers);
         $submitted = true;
