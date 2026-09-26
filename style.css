@@ -5295,6 +5295,62 @@ button.vf-btn-secondary:hover * {
 }
 
 /* ============================================================
+ * FIX CHỮ TIÊU ĐỀ NỀN TỐI SANG MÀU TRẮNG SÁNG TRÊN TOÀN BỘ CÁC DÒNG XE
+ * ============================================================ */
+/* 1. Tiêu đề Hero Banner chính của tất cả các dòng xe */
+.vf9-hero-title,
+h1.vf9-hero-title,
+.vf-hero-title,
+h1.vf-hero-title,
+.vf9-hero h1,
+.vf9-hero h2,
+.vf9-hero h3 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 2. Tiêu đề khối Nội thất trên nền ảnh tối */
+.vf9-interior-overlay h1,
+.vf9-interior-overlay h2,
+.vf9-interior-overlay h3,
+.vf9-interior-overlay h4,
+.vf9-interior-overlay strong {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
+}
+
+.vf9-interior-overlay p {
+  color: rgba(255, 255, 255, 0.92) !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 3. Tiêu đề khối Đặc quyền & Bảo hành trên nền xanh đen tối */
+.vf9-privilege-banner h1,
+.vf9-privilege-banner h2,
+.vf9-privilege-banner h3,
+.vf9-privilege-banner h4,
+.vf9-privilege-banner strong {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+.vf9-privilege-banner p {
+  color: #E2E8F0 !important;
+}
+
+.vf9-privilege-list li {
+  color: #ffffff !important;
+}
+
+/* 4. Đảm bảo tất cả tiêu đề trong các section nền tối khác */
+.vf9-section-dark h1,
+.vf9-section-dark h2,
+.vf9-section-dark h3,
+.vf9-section-dark h4 {
+  color: #ffffff !important;
+}
+
+/* ============================================================
  * CUSTOM FOOTER VINFAST VĨNH PHÚC & MOBILE STICKY BAR
  * ============================================================ */
 .vf-footer {
